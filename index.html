@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Focus Playlist Cutter</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 780px; margin: 32px auto; padding: 0 16px; }
+    .row { margin: 12px 0; }
+    button { padding: 10px 14px; }
+    select, input { padding: 8px; width: 100%; max-width: 520px; }
+    small { color: #555; }
+    #log { white-space: pre-wrap; background: #f6f6f6; padding: 12px; border-radius: 8px; }
+  </style>
+</head>
+<body>
+  <h1>母集団から時間で切り出し</h1>
+
+  <div class="row">
+    <button id="loginBtn">Spotifyでログイン</button>
+    <button id="logoutBtn" style="display:none;">ログアウト</button>
+  </div>
+
+  <div id="app" style="display:none;">
+    <div class="row">
+      <label>母集団プレイリスト</label><br/>
+      <select id="playlistSelect"></select><br/>
+      <small>※ 自分がowner / collaboratorのプレイリストだけ実用的（他はitems取得で403の可能性）</small>
+    </div>
+
+    <div class="row">
+      <label>目標時間（分）</label><br/>
+      <input id="minutes" type="number" value="30" min="1" max="240" />
+    </div>
+
+    <div class="row">
+      <label>許容誤差（秒）</label><br/>
+      <input id="tolerance" type="number" value="20" min="0" max="300" />
+    </div>
+
+    <div class="row">
+      <label>試行回数（大きいほど目標に寄る）</label><br/>
+      <input id="tries" type="number" value="5000" min="100" max="50000" />
+    </div>
+
+    <div class="row">
+      <button id="generateBtn">切り出して新規プレイリスト作成</button>
+    </div>
+  </div>
+
+  <h3>ログ</h3>
+  <div id="log"></div>
+
+  <script type="module" src="./app.js"></script>
+</body>
+</html>

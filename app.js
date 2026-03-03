@@ -287,7 +287,8 @@ async function main() {
       log(`選曲: ${picked.ids.length}曲 / 合計 ${(picked.sumMs/60000).toFixed(2)}分 / 差 ${(picked.diffMs/1000).toFixed(1)}秒`);
 
       const now = new Date().toISOString().slice(0,10);
-      const name = `Focus ${minutes}min ${now}`;
+      const customName = document.getElementById("playlistName").value.trim();
+      const name = customName || `Focus ${minutes}min ${now}`;
       const created = await createPlaylist(tok, name, "Pool-only time cut");
       await addItems(tok, created.id, picked.ids);
 
